@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - My Blog</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -18,12 +20,13 @@
             </nav>
         </div>
     </header>
+
     <main class="main-content">
         <section class="register-section">
             <div class="register-container">
                 <h2 class="register-title">Join Us!</h2>
                 <p class="register-subtitle">Create your account</p>
-                <form class="register-form">
+                <form class="register-form" onsubmit="return validateForm()">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -37,8 +40,8 @@
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                     <div class="form-group">
-                        <label for="password"> Confirm Password</label>
-                        <input type="password" id="password" name="password" placeholder="Confirm your password" required>
+                        <label for="password2">Confirm Password</label>
+                        <input type="password" id="password2" name="password2" placeholder="Confirm your password" required>
                     </div>
 
                     <button type="submit" class="register-button">Register</button>
@@ -51,5 +54,40 @@
             <p>&copy; 2024 MAMIDI TEJA. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        function validateForm() {
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("password2").value;
+            if (username.trim() === "") {
+                alert("Username is required.");
+                return false;
+            }
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            if (password.length < 6) {
+                alert("Password must be at least 6 characters long.");
+                return false;
+            }
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+            if (!passwordRegex.test(password)) {
+                alert("Password must contain at least one uppercase letter, one lowercase letter, and one number.");
+                return false;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            alert("Registration successful! Redirecting to login page...");
+            window.location.href = "login.html";
+            return false; 
+        }
+    </script>
+
 </body>
+
 </html>

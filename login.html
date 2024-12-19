@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - My Blog</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="index.js"></script>
 </head>
+
 <body>
     <header class="header">
         <div class="container">
@@ -15,16 +18,16 @@
                 <a href="about.html" class="nav-link">About</a>
                 <a href="contact.html" class="nav-link">Contact</a>
                 <a href="register.html" class="nav-link">Register</a>
-
             </nav>
         </div>
     </header>
+
     <main class="main-content">
         <section class="login-section">
             <div class="login-container">
                 <h2 class="login-title">Welcome Back!</h2>
                 <p class="login-subtitle">Log in to your account</p>
-                <form class="login-form">
+                <form class="login-form" onsubmit="return validateLoginForm()">
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -39,11 +42,37 @@
             </div>
         </section>
     </main>
+
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 MAMIDI TEJA. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        function validateLoginForm() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username.trim() === "") {
+                alert("Username is required.");
+                return false;
+            }
+            if (password.trim() === "") {
+                alert("Password is required.");
+                return false;
+            }
+            if (password.length < 6) {
+                alert("Password should contain at least 6 characters.");
+                return false;
+            }
+            if (password.length > 20) {
+                alert("Password should not exceed 20 characters.");
+                return false;
+            }
+            alert("Login successful! Redirecting to the home page...");
+            window.location.href = "index.html"; 
+            return false; 
+        }
+    </script>
 </body>
 </html>
-
